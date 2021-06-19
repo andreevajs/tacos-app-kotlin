@@ -17,6 +17,8 @@ class ProductsViewModel @Inject constructor(
         private val repository : TacosRepository
 ) : ViewModel()  {
     val _products = MutableLiveData<List<Product>>()
+    val _selectedProduct = MutableLiveData<Product>()
+
     fun load() {
         GlobalScope.launch(Dispatchers.IO) {
             Log.d("TEST_API", "sending")
@@ -27,5 +29,9 @@ class ProductsViewModel @Inject constructor(
                 Log.d("TEST_RESP", _products.value.toString())
             }
         }
+    }
+
+    fun select(product : Product) {
+        _selectedProduct.value = product;
     }
 }

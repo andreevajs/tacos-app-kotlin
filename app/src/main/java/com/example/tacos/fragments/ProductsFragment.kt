@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tacos.R
+import com.example.tacos.adapters.ProductAdapter
 import com.example.tacos.api.TacosApiService
 import com.example.tacos.databinding.FragmentMenuBinding
 import com.example.tacos.databinding.FragmentProductsBinding
@@ -35,9 +37,16 @@ class ProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProductsBinding.inflate(layoutInflater)
+
+        val adapter = ProductAdapter()
+
+        val recyclerView: RecyclerView = _binding.recyclerViewProducts
+        recyclerView.adapter = adapter
+
         viewModel._products.observe(viewLifecycleOwner,{ products ->
-            _binding.tv.text = products.toString()
+            adapter.setItems(products)
         })
+
         return _binding.root
     }
 
