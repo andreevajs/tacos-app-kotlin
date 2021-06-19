@@ -1,57 +1,58 @@
 package com.example.tacos.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.tacos.R
-import com.example.tacos.adapters.ProductAdapter
-import com.example.tacos.api.TacosApiService
-import com.example.tacos.databinding.FragmentMenuBinding
+import com.example.tacos.adapters.ProductItemAdapter
 import com.example.tacos.databinding.FragmentProductsBinding
-import com.example.tacos.models.Product
 import com.example.tacos.repositories.TacosRepository
 import com.example.tacos.viewmodels.ProductsViewModel
+import com.example.tacos.viewmodels.SharedProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Call
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductsFragment : Fragment() {
 
     @Inject lateinit var repository: TacosRepository
-    @Inject lateinit var viewModel: ProductsViewModel
-
-
     private lateinit var _binding :FragmentProductsBinding
+    private val _viewModel: ProductsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProductsBinding.inflate(layoutInflater)
-
-        val adapter = ProductAdapter()
-
-        val recyclerView: RecyclerView = _binding.recyclerViewProducts
-        recyclerView.adapter = adapter
-
-        viewModel._products.observe(viewLifecycleOwner,{ products ->
-            adapter.setItems(products)
-        })
-
         return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.load()
+        Glide.with(this)
+            .load(R.raw.happytaco)
+            .into(_binding.imageviewLoading)
+
+        val adapter = ProductItemAdapter { item ->
+            val sharedViewModel = ViewModelProvider(requireActivity()).get(SharedProductViewModel::class.java)
+            sharedViewModel.select(item.product)
+            findNavController().navigate(R.id.action_productsFragment_to_productDetailsFragment)
+        }
+
+        val recyclerView: RecyclerView = _binding.recyclerViewProducts
+        recyclerView.adapter = adapter
+
+        _viewModel.items.observe(viewLifecycleOwner,{ products ->
+            adapter.setItems(products)
+            _binding.imageviewLoading.visibility = View.INVISIBLE
+        })
+        _viewModel.load()
     }
 }
