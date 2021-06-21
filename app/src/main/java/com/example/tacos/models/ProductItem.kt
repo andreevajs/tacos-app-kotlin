@@ -13,5 +13,6 @@ class ProductItem(
         product.recipe
             .lines()
             .filter {it.startsWith("* ")}
+            .map {line -> if (line.length > 42) line.take(42) + "..." else line}
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tacos.di
 
 import android.content.Context
+import android.net.ConnectivityManager
 import com.example.tacos.MainActivity
 import com.example.tacos.TacosApp
 import com.example.tacos.api.TacosApiService
@@ -23,4 +24,9 @@ class ApiModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(TacosApiService::class.java)
+
+    @Provides
+    fun provideConnectivityManager(@ApplicationContext context: Context)
+    : ConnectivityManager = context
+        .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }
