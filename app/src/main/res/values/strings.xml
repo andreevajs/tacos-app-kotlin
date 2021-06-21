@@ -10,4 +10,9 @@
     <string name="label_product_ingredients">"ingredients: "</string>
     <string name="title_recipe">Recipe:</string>
     <string name="loading">loading…</string>
+    <string name="product_type_base_layer">Base Layers</string>
+    <string name="product_type_mixin">Mixins</string>
+    <string name="product_type_condiment">Condiment</string>
+    <string name="product_type_seasoning">Seasoning</string>
+    <string name="product_type_shell">shell</string>
 </resources>

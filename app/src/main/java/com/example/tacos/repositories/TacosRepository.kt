@@ -2,34 +2,22 @@ package com.example.tacos.repositories
 
 import com.example.tacos.api.TacosApiService
 import com.example.tacos.models.Product
+import com.example.tacos.models.ProductType
 import com.example.tacos.models.Taco
+import retrofit2.Response
 import javax.inject.Inject
 
 class TacosRepository @Inject constructor(
     private val api : TacosApiService
 ) {
-    suspend fun getBaseLayers(): List<Product>? {
-        val response = api.getBaseLayers()
-        return response.body()
-    }
-
-    suspend fun getMixins(): List<Product>? {
-        val response = api.getMixins()
-        return response.body()
-    }
-
-    suspend fun getCondiments(): List<Product>? {
-        val response = api.getCondiments()
-        return response.body()
-    }
-
-    suspend fun getSeasonings(): List<Product>? {
-        val response = api.getSeasonings()
-        return response.body()
-    }
-
-    suspend fun getShells(): List<Product>? {
-        val response = api.getShells()
+    suspend fun getProducts(productType: ProductType): List<Product>? {
+        val response = when (productType) {
+            ProductType.BASE_LAYER -> api.getBaseLayers()
+            ProductType.CONDIMENT -> api.getCondiments()
+            ProductType.MIXIN -> api.getMixins()
+            ProductType.SEASONING -> api.getSeasonings()
+            ProductType.SHELL -> api.getShells()
+        }
         return response.body()
     }
 

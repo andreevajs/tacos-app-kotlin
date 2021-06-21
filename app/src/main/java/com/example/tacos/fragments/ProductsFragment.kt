@@ -1,12 +1,12 @@
 package com.example.tacos.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +15,6 @@ import com.example.tacos.adapters.ProductItemAdapter
 import com.example.tacos.databinding.FragmentProductsBinding
 import com.example.tacos.repositories.TacosRepository
 import com.example.tacos.viewmodels.ProductsViewModel
-import com.example.tacos.viewmodels.SharedProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,7 +23,7 @@ class ProductsFragment : Fragment() {
 
     @Inject lateinit var repository: TacosRepository
     private lateinit var _binding :FragmentProductsBinding
-    private val _viewModel: ProductsViewModel by viewModels()
+    private val _viewModel: ProductsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +35,22 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("ViewModel", _viewModel.toString())
+
+        showLoadingAnimation()
+
+        createItems()
+    }
+
+    private fun showLoadingAnimation() {
         Glide.with(this)
             .load(R.raw.happytaco)
             .into(_binding.imageviewLoading)
+    }
 
+    private fun createItems() {
         val adapter = ProductItemAdapter { item ->
-            val sharedViewModel = ViewModelProvider(requireActivity()).get(SharedProductViewModel::class.java)
-            sharedViewModel.select(item.product)
+            _viewModel.selectProduct(item.product)
             findNavController().navigate(R.id.action_productsFragment_to_productDetailsFragment)
         }
 
