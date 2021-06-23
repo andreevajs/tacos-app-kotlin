@@ -13,19 +13,41 @@
         <action
             android:id="@+id/action_menuFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_tacosFragment"
+            app:destination="@id/tacosFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_tacoListFragment"
+            app:destination="@id/tacoListFragment" />
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.example.tacos.fragments.ProductsFragment"
+        android:name="com.example.tacos.fragments.ProductListFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" >
+        tools:layout="@layout/fragment_product_list" >
         <action
             android:id="@+id/action_productsFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.example.tacos.fragments.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
+    <fragment
+        android:id="@+id/tacosFragment"
+        android:name="com.example.tacos.fragments.TacosFragment"
+        android:label="fragment_tacos"
+        tools:layout="@layout/fragment_tacos" />
+    <fragment
+        android:id="@+id/tacoListFragment"
+        android:name="com.example.tacos.fragments.TacoListFragment"
+        android:label="fragment_taco_list"
+        tools:layout="@layout/fragment_taco_list" >
+        <action
+            android:id="@+id/action_tacoListFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
 </navigation>

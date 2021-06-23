@@ -7,7 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MenuFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="@string/title_main"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="64sp"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="119dp" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -45,6 +57,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/product_type_shell" />
+
+        <Button
+            android:id="@+id/btn_taco"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/red_dark"
+            android:text="@string/label_btn_to_taco_fragment" />
+
+        <Button
+            android:id="@+id/btn_my_tacos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_my_tacos" />
 
     </LinearLayout>
 

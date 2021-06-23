@@ -10,9 +10,18 @@
     <string name="label_product_ingredients">"ingredients: "</string>
     <string name="title_recipe">Recipe:</string>
     <string name="loading">loading…</string>
-    <string name="product_type_base_layer">Base Layers</string>
-    <string name="product_type_mixin">Mixins</string>
+    <string name="product_type_base_layer">Base Layer</string>
+    <string name="product_type_mixin">Mixin</string>
     <string name="product_type_condiment">Condiment</string>
     <string name="product_type_seasoning">Seasoning</string>
-    <string name="product_type_shell">shell</string>
+    <string name="product_type_shell">Shell</string>
+    <string name="tacos_mixin_pretext">with</string>
+    <string name="tacos_condiment_pretext">garnished with</string>
+    <string name="tacos_seasoning_pretext">topped off with</string>
+    <string name="tacos_shell_pretext">and wrapped in</string>
+    <string name="label_get_random_taco">More tacos!</string>
+    <string name="label_btn_to_taco_fragment">One taco, please</string>
+    <string name="label_my_tacos">my tacos</string>
+    <string name="title_taco_randomizer">Taco Randomizer</string>
+    <string name="title_main">Tacos</string>
 </resources>

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tacos.R
 import com.example.tacos.databinding.FragmentMenuBinding
@@ -33,29 +32,32 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("ViewModel", _productsViewModel.toString())
         _binding.btnBaseLayers.setOnClickListener {
-            selectProductType(ProductType.BASE_LAYER)
-            findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
+            goToProductsList(ProductType.BASE_LAYER)
         }
         _binding.btnCondiments.setOnClickListener {
-            selectProductType(ProductType.CONDIMENT)
-            findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
+            goToProductsList(ProductType.CONDIMENT)
         }
         _binding.btnMixins.setOnClickListener {
-            selectProductType(ProductType.MIXIN)
-            findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
+            goToProductsList(ProductType.MIXIN)
         }
         _binding.btnSeasonings.setOnClickListener {
-            selectProductType(ProductType.SEASONING)
-            findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
+            goToProductsList(ProductType.SEASONING)
         }
         _binding.btnShells.setOnClickListener {
-            selectProductType(ProductType.SHELL)
-            findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
+            goToProductsList(ProductType.SHELL)
+        }
+        _binding.btnTaco.setOnClickListener {
+            findNavController().navigate(R.id.action_menuFragment_to_tacosFragment)
+        }
+        _binding.btnMyTacos.setOnClickListener {
+            findNavController().navigate(R.id.action_menuFragment_to_tacoListFragment)
         }
 
     }
 
-    private fun selectProductType(productType: ProductType) {
+    private fun goToProductsList(productType: ProductType) {
         _productsViewModel.selectType(productType)
+        _productsViewModel.load()
+        findNavController().navigate(R.id.action_menuFragment_to_productsFragment)
     }
 }

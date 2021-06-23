@@ -12,24 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tacos.R
 import com.example.tacos.adapters.ProductItemAdapter
-import com.example.tacos.databinding.FragmentProductsBinding
-import com.example.tacos.repositories.TacosRepository
+import com.example.tacos.databinding.FragmentProductListBinding
 import com.example.tacos.viewmodels.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductsFragment : Fragment() {
+class ProductListFragment : Fragment() {
 
-    @Inject lateinit var repository: TacosRepository
-    private lateinit var _binding :FragmentProductsBinding
+    private lateinit var _binding :FragmentProductListBinding
     private val _viewModel: ProductsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProductsBinding.inflate(layoutInflater)
+        _binding = FragmentProductListBinding.inflate(layoutInflater)
         return _binding.root
     }
 
@@ -61,6 +58,5 @@ class ProductsFragment : Fragment() {
             adapter.setItems(products)
             _binding.imageviewLoading.visibility = View.INVISIBLE
         })
-        _viewModel.load()
     }
 }

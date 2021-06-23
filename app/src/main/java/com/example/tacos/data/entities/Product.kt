@@ -10,5 +10,5 @@ data class Product (
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "type") val type: String,
     @ColumnInfo(name = "recipe") val recipe: String,
-    @ColumnInfo(name = "url") val url: String,
+    @ColumnInfo(name = "url") val url: String
 )

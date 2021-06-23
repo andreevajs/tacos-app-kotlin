@@ -1,6 +1,7 @@
 package com.example.tacos.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,6 +39,9 @@ class ProductDetailsFragment : Fragment() {
         _binding.btnShareProduct.setOnClickListener {
             shareProduct(_viewModel.selectedProduct.value)
         }
+        _binding.btnSearchProduct.setOnClickListener {
+            searchProduct(_viewModel.selectedProduct.value)
+        }
     }
 
     private fun shareProduct(product : Product?)
@@ -55,5 +59,17 @@ class ProductDetailsFragment : Fragment() {
             .putExtra(Intent.EXTRA_TEXT, contents)
 
         startActivity(Intent.createChooser(share, "Share recipe!"))
+    }
+
+    private fun searchProduct(product : Product?) {
+        if (product != null) {
+            val query = Regex("[^A-Za-z0-9 ]")
+                .replace(product.name, "")
+                .replace(" ","+")
+
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse("https://www.google.com/search?q=${query}")
+            startActivity(openURL)
+        }
     }
 }

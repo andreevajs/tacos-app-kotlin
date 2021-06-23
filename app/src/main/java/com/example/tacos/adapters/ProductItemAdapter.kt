@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tacos.R
-import com.example.tacos.models.Product
 import com.example.tacos.models.ProductItem
 
 class ProductItemAdapter(
@@ -15,7 +14,7 @@ class ProductItemAdapter(
 
     private var _items = listOf<ProductItem>()
 
-    class ProductViewHolder(view: View, val onClick: (ProductItem) -> Unit)
+    class ProductViewHolder(view: View, private val onClick: (ProductItem) -> Unit)
         : RecyclerView.ViewHolder(view) {
         private var _productItem : ProductItem? = null
 

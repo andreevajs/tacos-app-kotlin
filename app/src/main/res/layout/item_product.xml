@@ -56,15 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/btn_favorites"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/shape_heart"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:backgroundTint="@android:color/darker_gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

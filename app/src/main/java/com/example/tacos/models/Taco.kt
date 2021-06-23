@@ -1,6 +1,6 @@
 package com.example.tacos.models
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
 data class Taco(
         val mixin: Product,
@@ -9,4 +9,13 @@ data class Taco(
         val baseLayer: Product,
         val condiment: Product,
         val shell: Product
-);
+) {
+        fun getProducts() : List<Product> =
+        listOf(
+                baseLayer,
+                mixin,
+                condiment,
+                seasoning,
+                shell
+        )
+}
